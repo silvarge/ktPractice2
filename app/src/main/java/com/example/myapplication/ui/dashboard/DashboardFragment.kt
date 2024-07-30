@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.NumberPicker
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.databinding.FragmentDashboardBinding
@@ -28,7 +29,7 @@ class DashboardFragment : Fragment() {
     
     _binding = FragmentDashboardBinding.inflate(inflater, container, false)
     val root: View = binding.root
-    
+
 //     number picker 설정
     dashboardViewModel.pickerValues.observe(viewLifecycleOwner) { values ->
       binding.numberPicker.minValue = 0
@@ -36,14 +37,14 @@ class DashboardFragment : Fragment() {
       binding.numberPicker.displayedValues = values
       binding.numberPicker.wrapSelectorWheel = true
     }
-    
+
 //    선택된 인덱스 관찰
     dashboardViewModel.selectedIndex.observe(viewLifecycleOwner) { index ->
       binding.numberPicker.value = index
     }
-    
+
 //    변경 이벤트 발생 시
-    binding.numberPicker.setOnValueChangedListener {_, _, newVal ->
+    binding.numberPicker.setOnValueChangedListener { _, _, newVal ->
       dashboardViewModel.updateSelectedIndex(newVal)
     }
     
@@ -54,6 +55,28 @@ class DashboardFragment : Fragment() {
     }
     
     return root
+  }
+  
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    
+    binding.tvModalBefore.setOnClickListener {
+      showModal()
+    }
+    
+  }
+  
+  private fun showModal() {
+    val builder = AlertDialog.Builder(requireContext())
+    builder.setTitle("Modal Title")
+    builder.setMessage("Content")
+    builder.setPositiveButton("OK") { dialog, _ ->
+      dialog.dismiss()
+    }
+    builder.setNegativeButton("Cancel") { dialog, _ ->
+      dialog.dismiss()
+    }
+    builder.create().show()
   }
   
   override fun onDestroyView() {

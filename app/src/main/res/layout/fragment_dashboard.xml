@@ -54,7 +54,7 @@
 
 
         <TextView
-            android:id="@+id/tvModal"
+            android:id="@+id/tvModalBefore"
             android:layout_width="217dp"
             android:layout_height="38dp"
             android:text="Touch get a Modal"
@@ -72,7 +72,7 @@
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvModal" />
+            app:layout_constraintTop_toBottomOf="@+id/tvModalBefore" />
 
         <TextView
             android:id="@+id/tvModalResult"
